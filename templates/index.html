@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>To-do list</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+  </head>
+  <body>
+   
+
+    <div class="columns mt-5 is-mobile">
+      <div class="column "> </div>
+      <div class="box column  "><h1 class="title">To-do list</h1></div>
+      <div class="column"> </div>
+    </div>
+
+    <div class="columns is-mobile">
+      <div class="column "> </div>
+      <div class="box column ">
+        <form  action="/add/" method="POST"  class="is-flex">
+          {%csrf_token%}
+          <input class="input is-primary mr-2" name="name" type="text" placeholder="Task">
+          <input class="button is-success"  type="submit" value=" + ">
+        </form>
+      </div>
+      <div class="column"> </div>
+    </div>
+    <div class="columns is-mobile">
+      <div class="column "> </div>
+      <div class="box column ">
+       {%for task in task %}
+
+        <form  action="/edit/{{task.id}}" method="POST"  class="is-flex">
+          {%csrf_token%}
+          <div  class="column "><input {%if task.comp%}  class="has-background-black" {%else%} {%endif%}   style="border: 0;" type="text" name="name" value="{{task.name}}"></div>
+          <div class="mr-1"><input {%if task.comp%} disabled {%else%} {%endif%} class="button is-warning"  type="submit" value="edit" name="method"></div>
+          <div class="mr-1"><input {%if task.comp%} disabled {%else%}{%endif%} class="button is-success"  type="submit" value="✓" name="method"></div>
+         
+          <div><input class=" button is-danger"  type="submit" value="-" name="method"></div>
+         
+        </form>
+         
+      
+       {%endfor%}
+      </div>
+      <div class="column"> </div>
+    </div>
+    <div class="columns mt-5 is-mobile">
+      <div class="column "> </div>
+      <div class="box column  ">By<a href="http://instragram.com/tanarak.py"> @tanarak.py</a></div>
+      <div class="column"> </div>
+    </div>
+
+    
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
